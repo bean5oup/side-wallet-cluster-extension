@@ -1,0 +1,1214 @@
+{
+  "policy_version": "top100-lowcap-1m-v2",
+  "artifact_type": "agent_operating_plan",
+  "documented_at_kst_date": "2026-10-07",
+  "status": "buy_cap_and_actual_swap_first_batch_reviewed",
+  "runtime_enforced": false,
+  "repo_root": "/Users/seoho/Desktop/web3/fomo-top-trader-research",
+  "canonical_database": "data/research/fomo.sqlite3",
+  "cohort": {
+    "period": "30d",
+    "leaderboard_raw_payload_id": 1654,
+    "snapshot_at_utc": "2026-10-07T00:29:19.532Z",
+    "rank_min_inclusive": 1,
+    "rank_max_inclusive": 100,
+    "identity_field": "fomo_user_id",
+    "all_time_raw1655_is_separate": true
+  },
+  "historical_window": {
+    "start_utc_inclusive": "2026-08-08T04:43:41Z",
+    "end_utc_exclusive": "2026-10-07T04:43:41Z",
+    "incremental_requires_separate_task": true,
+    "lookback_days": 60,
+    "duration_seconds": 5184000,
+    "anchor_mode": "freeze_end_at_campaign_start",
+    "subtasks_share_same_window": true,
+    "requires_explicit_coverage_and_gap_reporting": true
+  },
+  "token_gate": {
+    "unit": "chain_token_anchor_event",
+    "metric": "historical_circulating_market_cap_usd",
+    "reference_time": "thesis_or_call_published_at_or_reviewed_actual_buy_at_utc",
+    "max_usd_inclusive": "1000000",
+    "unknown_eligible": false,
+    "fdv_proxy_eligible": false,
+    "current_market_cap_eligible": false,
+    "statuses": [
+      "eligible",
+      "excluded_above_cap",
+      "pending_cap",
+      "pending_cap_proxy",
+      "pending_source"
+    ],
+    "sample_max_age_seconds_working_assumption": 300,
+    "threshold_ambiguity_action": "defer",
+    "bands": [
+      {
+        "label": "below_30k",
+        "min_inclusive": "0",
+        "max_exclusive": "30000"
+      },
+      {
+        "label": "30k_to_below_200k",
+        "min_inclusive": "30000",
+        "max_exclusive": "200000"
+      },
+      {
+        "label": "200k_to_1m_inclusive",
+        "min_inclusive": "200000",
+        "max_inclusive": "1000000"
+      }
+    ],
+    "anchor_types": [
+      "THESIS",
+      "CALL",
+      "BUY"
+    ],
+    "thesis_required_for_buy": false,
+    "buy_reference_priority": [
+      "reviewed_actual_swap_at_utc",
+      "fomo_reported_buy_time_provisional_only"
+    ],
+    "buy_deep_analysis_requires_actual_swap_review": true,
+    "cap_at_thesis_not_reused_as_cap_at_buy": true
+  },
+  "agents": {
+    "worker_count": 5,
+    "worker_model": "gpt-6-luna",
+    "primary_role": "coordinator_ingester_reviewer",
+    "primary_model": "keep_current",
+    "workers_may_spawn_subagents": false,
+    "initial_assignments": [
+      {
+        "worker_id": "luna_1",
+        "rank_min_inclusive": 1,
+        "rank_max_inclusive": 20
+      },
+      {
+        "worker_id": "luna_2",
+        "rank_min_inclusive": 21,
+        "rank_max_inclusive": 40
+      },
+      {
+        "worker_id": "luna_3",
+        "rank_min_inclusive": 41,
+        "rank_max_inclusive": 60
+      },
+      {
+        "worker_id": "luna_4",
+        "rank_min_inclusive": 61,
+        "rank_max_inclusive": 80
+      },
+      {
+        "worker_id": "luna_5",
+        "rank_min_inclusive": 81,
+        "rank_max_inclusive": 100
+      }
+    ],
+    "later_assignment_unit": "deduplicated_chain_token_window",
+    "worker_reasoning_effort": "max",
+    "worker_spawn_parameters": {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "max",
+      "fork_turns": "none"
+    }
+  },
+  "stages": [
+    "account_source_capture_and_normalization",
+    "historical_cap_review",
+    "actual_swap_final_buyer_and_cluster_analysis",
+    "funding_exit_bridge_cex_comparison",
+    "primary_review_and_canonical_ingestion"
+  ],
+  "discovery_windows_working_assumptions": {
+    "anchor": "each_eligible_thesis_call_or_buy",
+    "compare_earliest_observed_public_separately": true,
+    "pre_public_seconds": 7200,
+    "post_public_seconds": 3600,
+    "initial_exit_post_public_seconds": 86400,
+    "clip_to_historical_window": true,
+    "not_lifetime_coverage": true,
+    "cluster_windows_seconds": [
+      10,
+      30,
+      60
+    ],
+    "exploratory_min_distinct_buyers_in_60s": 3,
+    "require_background_comparison": true,
+    "buy_clock": "actual_wallet_swap_after_independent_review",
+    "buy_provisional_clock": "fomo_source_timestamp_for_queueing_only",
+    "buy_short_pre_windows_seconds": [
+      10,
+      30,
+      60,
+      300,
+      900
+    ],
+    "copy_trading_public_visibility_clock": "independent_observation_or_unknown",
+    "same_timestamp_order_requires_block_transaction_or_instruction_order": true,
+    "include_buys_without_retained_thesis": true
+  },
+  "planned_global_batch_limits": {
+    "basis": "all_workers_plus_primary_failures_and_retries_included",
+    "fomo_http_attempts_max": 20,
+    "fomo_credits_max": 15000,
+    "direct_rpc_attempts_max": 30,
+    "bridge_attempts_max": 5,
+    "nodit_indexed_attempts_max": 100,
+    "market_data_attempts_max": 20,
+    "retry_max_per_failed_request": 1,
+    "reserve_before_dispatch": true,
+    "per_worker_budget_reset_allowed": false,
+    "unallocated_requests_allowed": false
+  },
+  "planned_fomo_foundation_campaign": {
+    "credits_max": 150000,
+    "default_users_per_batch": 10,
+    "default_thesis_pages_per_user": 1,
+    "default_alert_pages_per_user": 1,
+    "wallet_resolution_calls_included_by_default": false,
+    "limits_are_working_assumptions": true,
+    "actual_cost_and_balance_from_response_headers": true
+  },
+  "bigquery": {
+    "project": "exchange-labs",
+    "interface": "existing_authenticated_bq_cli_or_api",
+    "dry_run_required": true,
+    "explicit_maximum_bytes_billed_required": true,
+    "default_maximum_bytes_billed_per_query": "42949672960",
+    "larger_cap_requires_primary_scope_and_estimate_record": true,
+    "cost_estimate_is_batch_aggregate": true,
+    "large_cost_notify_before_execution_krw_working_assumption": 50000,
+    "actual_credit_balance_verified": false
+  },
+  "storage": {
+    "canonical_writer": "primary_only",
+    "worker_canonical_db_mode": "read_only",
+    "raw_path_pattern": "data/raw/parallel/<batch_id>/<task_id>/",
+    "worker_path_pattern": "data/research/parallel/<batch_id>/<task_id>/",
+    "batch_manifest_path_pattern": "data/research/parallel/<batch_id>/manifest.json",
+    "worker_outputs": [
+      "result.json",
+      "normalized.jsonl",
+      "report.md"
+    ],
+    "amount_raw_type": "integer_string",
+    "reuse_complete_capture": true,
+    "new_relationship_tables_already_implemented": false
+  },
+  "sources": {
+    "fomo": "REST_only",
+    "history": "bounded_indexed_or_bigquery",
+    "important_proof": "RPC_or_Etherscan",
+    "bridge": "local_bridge_API_plus_leg_proof",
+    "dune_active": false,
+    "websocket_active": false,
+    "credentials": "existing_ignored_environment_only"
+  },
+  "required_evidence_rules": [
+    "swap_not_transfer",
+    "final_buyer_not_router",
+    "provider_assertion_separate_from_rpc_proof",
+    "earliest_observed_public_not_absolute_first_public",
+    "same_exact_cex_chain_address_not_same_exchange_name",
+    "shared_service_not_customer_identity",
+    "unknown_ownership_until_independent_evidence",
+    "pnl_unknown_without_cost_exit_quote_fees_and_prior_lots",
+    "retrieval_complete_not_history_complete",
+    "thesis_not_required_for_buy_anchor",
+    "actual_buy_separate_from_public_visibility_and_capture",
+    "same_second_order_unknown_without_transaction_order",
+    "prebuy_then_exit_then_funding_connection_required_for_copy_trade_exploitation_hypothesis",
+    "token_fee_sweeps_and_holder_rewards_not_private_funding",
+    "issuer_dev_buys_separate_from_hidden_wallet_prebuys",
+    "launch_airdrop_api_null_not_absence_of_manual_distributions"
+  ],
+  "execution_prerequisites": [
+    "resolve_explicit_100_user_ids_from_raw1654",
+    "prepare_fixed_cohort_compatible_collection_and_ingestion",
+    "create_global_budget_ledger_and_worker_reservations",
+    "assign_scoped_non_template_task_packets"
+  ],
+  "entrypoints": {
+    "workflow": "docs/parallel-investigation.md",
+    "worker": "agents/worker.md",
+    "reviewer": "agents/reviewer.md",
+    "task_template": "agents/task-packet.template.json",
+    "event_inventory": "src/fomo_research/parallel_anchors.py"
+  },
+  "historical_collection_targets": {
+    "fomo_public_and_trade_events_days": 60,
+    "eligible_token_wallet_history_days": 60,
+    "market_discovery_windows_are_prioritized_slices_not_full_history": true,
+    "provider_retention_is_not_guaranteed": true,
+    "continue_pagination_in_later_budgeted_batches": true
+  },
+  "runtime_enforcement_scope": {
+    "entrypoint": "src/fomo_research/parallel_foundation.py",
+    "fixed_cohort_explicit_ids": true,
+    "exact_60_day_normalization": true,
+    "root_fomo_batch_and_campaign_ledger": true,
+    "worker_external_calls_in_this_batch": 0,
+    "all_legacy_and_provider_paths_globally_enforced": false,
+    "market_capture_this_batch": "bounded_primary_reservation_and_manifest",
+    "remaining_providers": "reservation_required_before_later_dispatch",
+    "buy_anchor_inventory": "parallel_anchors.py_offline_canonical_sources_root_writer",
+    "buy_cluster_collection": "not_yet_executed_pending_cap_and_actual_swap_review"
+  },
+  "execution_records": [
+    {
+      "batch_id": "top100-60d-20261007-v1-batch001",
+      "review_raw_payload_id": 2096,
+      "report": "docs/top100-first-batch-review.md",
+      "live_capture_attempted_accounts": 10,
+      "cohort_unique_thesis_documents": 100,
+      "history_60_day_complete_accounts": 0,
+      "worker_count": 5,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max"
+    },
+    {
+      "kind": "offline_buy_anchor_inventory",
+      "policy_version": "top100-lowcap-1m-v2",
+      "review_raw_payload_id": 2099,
+      "report": "docs/buy-prebuy-review.md",
+      "thesis_anchors": 100,
+      "buy_anchors": 84,
+      "combined_chain_token_count": 112,
+      "buy_only_cohort_token_count": 25,
+      "new_external_requests": 0,
+      "deep_onchain_allowed_anchors": 0
+    },
+    {
+      "batch_id": "top10-60d-20261008-v1-batch012",
+      "status": "closed_repeated_exit_endpoint_review",
+      "completed_at_utc": "2026-10-08T08:02:27.663Z",
+      "closed_at_utc": "2026-10-08T08:06:22.425Z",
+      "review_raw_payload_id": 2560,
+      "evidence_raw_payload_id": 2559,
+      "report_raw_payload_id": 2561,
+      "report": "docs/top10-repeated-exit-endpoint-review.md",
+      "resume_state_key": "initial_top10_repeated_exit_endpoint_review_v1",
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 28,
+        "bridge_attempts": 2,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 2,
+        "primary_documentation_lookups": 3
+      },
+      "canonical_inserted": {
+        "onchain_trades": 0,
+        "wallet_trace_edges": 19
+      },
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "source_coverage": "8FXfixed60d_native+singleUSDCATA_queriesclosed; otherassets/wholewalletpartial",
+      "cap_status": "pending_cap",
+      "beneficial_ownership": "unknown",
+      "common_customer_cex": "sameexactBinance-labelleddeposit8eHf/55n verified; customeridentity/exclusivityunknown; directmainunobserved"
+    },
+    {
+      "batch_id": "top10-60d-20261008-v1-batch013",
+      "status": "closed_linked_wallet_prebuy_chronology_review",
+      "completed_at_utc": "2026-10-08T09:08:38.280Z",
+      "closed_at_utc": "2026-10-08T09:09:09.429Z",
+      "review_raw_payload_id": 2591,
+      "evidence_raw_payload_id": 2590,
+      "report_raw_payload_id": 2592,
+      "report": "docs/top10-linked-wallet-prebuy-chronology.md",
+      "resume_state_key": "initial_top10_linked_wallet_prebuy_chronology_v1",
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 20,
+        "bridge_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 3,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 3,
+        "primary_documentation_lookups": 2
+      },
+      "canonical_inserted": {
+        "onchain_trades": 30,
+        "wallet_trace_edges": 0
+      },
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "source_coverage": "8e1740native/497STONKATA/31K5ATA;2TfK5ATA2 andEH8nativefooterclosed;allassets/publicexposurepartial",
+      "cap_status": "pending_cap unchanged; STONKdeprioritized >1Mhourlycontext; DARKmissinghistorical",
+      "beneficial_ownership": "unknown",
+      "common_customer_cex": "reuse012 exact8FX linked8e/55n; customeridentity/mainmatch/lotunknown",
+      "role_corrections": "3ZLek NEAR/wNEAR, not6GmSTONK;3verifiedofficialrewardpayouts;1mixedCARDSrouteexcluded"
+    },
+    {
+      "batch_id": "top10-60d-20261008-v1-batch014",
+      "canonical_inserted": {
+        "onchain_trades": 0,
+        "wallet_trace_edges": 17
+      },
+      "completed_at_utc": "2026-10-08T11:50:29.764Z",
+      "conclusions": {
+        "7kHo_intersection_nonzero_owner_token_deltas": 0,
+        "7kHo_native_history_partial_rows": 200,
+        "7kHo_retained_Solstice_thesis_mints": 16,
+        "DARK_incremental_end_exclusive_utc": "2026-10-08T11:03:14Z",
+        "ZEC_distribution_credits": 58,
+        "ZEC_paid_buys": 0,
+        "ZEC_quote_net_USDT_raw": "396777742",
+        "actual_transfers_added": 17,
+        "core_pattern": "Related same separate wallet actual paid BUY and positive inventory before associated author THESIS then samewallet SELL/quote after; no main transfer required",
+        "historical_cap": "pending for candidates; no new eligible tokenwide/BQ",
+        "new_bidirectional_connection": {
+          "USDC_main_to_linked_count": 13,
+          "amount_raw": "169629012018",
+          "main": "4ugDhHJ8XDXAeABmrNmGffFaLbJb9BkPyiFGVSV9ocwo",
+          "owner": "7kHoDVivC5b9JJN4WArSw2ssc2u5mZBjcy2cobJn7nAF",
+          "return_count": 2,
+          "return_raw": "11740325990"
+        },
+        "not_all_hidden_wallet_absence": true,
+        "ownership_intent_customer_cex_PnL": "unknown",
+        "qualifying_best_pattern_in_examined_scope": 0,
+        "source_2KNo_DARK_thesis_balance_raw": "5068289664",
+        "source_post_thesis_sell_observed": 0,
+        "trades_or_wallet_promotions": 0
+      },
+      "evidence_raw_payload_id": 2636,
+      "frontier": [
+        {
+          "budget": "new global reservation required",
+          "closed_USDC_account_reuse": [
+            2625,
+            2626,
+            2630
+          ],
+          "cursor": "443784815:369",
+          "owner": "7kHoDVivC5b9JJN4WArSw2ssc2u5mZBjcy2cobJn7nAF",
+          "partial_observed_end_utc": "2026-09-02T20:10:53Z",
+          "priority": 1,
+          "raw_refs": [
+            2627,
+            2628
+          ],
+          "task": "Complete new actually bidirectional7kHo known-owner history from saved cursor; inspect historical owner final token balances and native wrap/unwrap, stake/position alternatives before selecting exact target ATA. Match same Solstice author/mint only; not13USDCtransfers=13buys."
+        },
+        {
+          "no_top100_expansion": true,
+          "priority": 2,
+          "task": "Original10 historicalcap<=1M event with actual external buyer: use existing eligible ARTHUR event/buyers and known nonservice links. Resolve missing public provenance/cap for linked cases; tokenwide/BQ only approved event, dryrun/cap. MainBUY-only remains background."
+        },
+        {
+          "bridge_raw": 2621,
+          "browser_challenge_raw_refs": [
+            2617,
+            2622,
+            2624,
+            2629
+          ],
+          "priority": 3,
+          "role": "unknown",
+          "task": "New7kHo/7X7g/7Uh role and exactcustomer endpoint assertions when browser accessible; compare actual exact address with linked buyers/main; do not scan pooled125281USDC toattribute Solstice lots."
+        },
+        {
+          "last_incremental_raw": 2608,
+          "priority": 4,
+          "task": "Known complete DARK Ctm/2KNo fixedquery reuse. Source2KNo next activity after2026-10-08T11:03:14Z needs distinct incremental task only if relevant; do not redo checkedfixed/history. Qualifying sourcepostTHESISSELL stillunobserved."
+        },
+        {
+          "DET_USDC_cursor": "444718695:228",
+          "DET_raw_refs": [
+            2597,
+            2598,
+            2599,
+            2600
+          ],
+          "F5hk_cursor": "439912001:1347",
+          "F5hk_query_end_exclusive_epoch": 1791315990,
+          "Solstice_cursor": "442507788:1244",
+          "Solstice_query_end_exclusive_epoch": 1791137640,
+          "Top100": "parked",
+          "priority": 5,
+          "standalone_RZD": "parked",
+          "task": "Missing original10 foundation cursors; exact query/account completeness distinct from entire60d."
+        }
+      ],
+      "protected_old_states": 46,
+      "report_document": "docs/top10-same-wallet-thesis-exit-review.md",
+      "review_raw_payload_id": 2637,
+      "source_usage": {
+        "bigquery_dry_run_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bridge_attempts": 1,
+        "chrome_direct_navigations": 5,
+        "direct_rpc_attempts": 30,
+        "fomo_credits": 0,
+        "fomo_http_attempts": 0,
+        "market_data_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "primary_documentation_lookups": 0
+      },
+      "status": "closed_same_separate_wallet_thesis_exit_review",
+      "worker_raw_payload_ids": [
+        2631,
+        2632,
+        2633,
+        2634,
+        2635
+      ],
+      "report_raw_payload_id": 2639,
+      "report_markdown_sha256": "5446c3666a694761b4c379e169bec3592ae865e6d6a4c348a0cf332f18b724d9",
+      "report": "docs/top10-same-wallet-thesis-exit-review.md",
+      "resume_state_key": "initial_top10_same_wallet_thesis_exit_review_v1",
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "closed_at_utc": "2026-10-08T11:51:17.064Z",
+      "superseded_report_raw_payload_ids": [
+        2638
+      ]
+    }
+  ],
+  "execution_prerequisites_completed": [
+    "resolve_explicit_100_user_ids_from_raw1654",
+    "prepare_fixed_cohort_compatible_collection_and_ingestion",
+    "create_global_budget_ledger_and_worker_reservations",
+    "assign_scoped_non_template_task_packets"
+  ],
+  "latest_buy_review": {
+    "batch_id": "top100-60d-20261007-v2-buy001",
+    "review_raw_payload_id": 2140,
+    "inventory_review_raw_payload_id": 2141,
+    "review_document": "docs/buy-first-batch-review.md",
+    "counts": {
+      "reviewed_buy_source_anchors": 26,
+      "distinct_accounts": 7,
+      "distinct_exact_tokens": 9,
+      "actual_swap_verified_anchors": 3,
+      "candidate_token_deliveries_rpc_verified": 2,
+      "cap_status_counts": {
+        "pending_cap": 23,
+        "pending_cap_proxy": 2,
+        "excluded_above_cap": 1
+      },
+      "eligible_for_deep_collection": 0,
+      "new_onchain_trades": 2,
+      "new_event_trade_matches": 2,
+      "new_indexed_collections": 2,
+      "new_indexed_movements": 2,
+      "public_visibility_unknown_anchors": 26,
+      "qualified_prebuy_clusters": 0,
+      "qualified_common_cex_endpoints": 0,
+      "qualified_realized_pnl": 0,
+      "history_completeness": "partial_not_60_day_complete"
+    },
+    "actual_usage": {
+      "fomo_http_attempts": 0,
+      "fomo_credits_reported": 0,
+      "market_data_attempts": 20,
+      "direct_rpc_attempts": 11,
+      "nodit_indexed_attempts": 2,
+      "bridge_attempts": 0,
+      "bigquery_queries": 0
+    },
+    "reservation_status": "closed",
+    "history_coverage_status": "partial_not_60_day_complete",
+    "review_reuse_source": "top100_buy_anchor_review",
+    "review_reuse_module": "src/fomo_research/parallel_anchors.py"
+  },
+  "active_execution_focus": {
+    "focus_id": "initial-top10-60d-lowcap-1m-v1",
+    "status": "reviewed_partial",
+    "focus_file": "docs/top10-investigation-focus.json",
+    "plan_document": "docs/top10-investigation-priorities.md",
+    "cohort_raw_payload_id": 141,
+    "account_count": 10,
+    "supersedes_top100_expansion_dispatch": true,
+    "existing_top100_runtime_helpers_enforce_this_focus": false,
+    "prior_top100_cohort_and_execution_records_preserved": true,
+    "source_strategy_version": "top10-selective-bigquery-chrome-trace-v1",
+    "preferred_trace_browser": "chrome",
+    "browser_navigation_owner": "primary_agent",
+    "bigquery_strategy": "conditional_bounded_discovery_and_coverage_reconciliation",
+    "research_objective": "Related same separate wallet actual paid BUY and positive inventory before associated author THESIS then samewallet SELL/quote after; no main transfer required",
+    "latest_linked_wallet_core_review": {
+      "batch_id": "top10-60d-20261008-v1-batch010",
+      "status": "closed_linked_wallet_core_review",
+      "completed_at_utc": "2026-10-08T05:49:41.979Z",
+      "review_raw_payload_id": 2482,
+      "evidence_raw_payload_id": 2481,
+      "report_raw_payload_id": 2483,
+      "report": "docs/top10-linked-wallet-core-review.md",
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 25,
+        "bridge_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 1,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 4,
+        "primary_documentation_lookups": 0
+      },
+      "canonical_inserted": {
+        "onchain_trades": 44,
+        "wallet_trace_edges": 43
+      },
+      "core": "linked separatewallets; mainFomo BUY->THESIS contextonly"
+    },
+    "latest_linked_wallet_exit_review": {
+      "batch_id": "top10-60d-20261008-v1-batch011",
+      "status": "closed_linked_wallet_exit_review",
+      "completed_at_utc": "2026-10-08T07:07:40.518Z",
+      "closed_at_utc": "2026-10-08T07:13:31.541Z",
+      "review_raw_payload_id": 2522,
+      "evidence_raw_payload_id": 2521,
+      "report_raw_payload_id": 2523,
+      "report": "docs/top10-linked-wallet-exit-review.md",
+      "resume_state_key": "initial_top10_linked_wallet_exit_review_v1",
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 28,
+        "bridge_attempts": 5,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 4,
+        "primary_documentation_lookups": 0
+      },
+      "canonical_inserted": {
+        "onchain_trades": 62,
+        "wallet_trace_edges": 22
+      },
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "source_coverage": "exact_known_ATA_pages_closed; main_USDC_4000_prefix_partial; wholewallet60d_partial",
+      "cap_status": "pending_cap",
+      "beneficial_ownership": "unknown",
+      "common_customer_cex": "notestablished"
+    },
+    "latest_repeated_exit_endpoint_review": {
+      "batch_id": "top10-60d-20261008-v1-batch012",
+      "status": "closed_repeated_exit_endpoint_review",
+      "completed_at_utc": "2026-10-08T08:02:27.663Z",
+      "closed_at_utc": "2026-10-08T08:06:22.425Z",
+      "review_raw_payload_id": 2560,
+      "evidence_raw_payload_id": 2559,
+      "report_raw_payload_id": 2561,
+      "report": "docs/top10-repeated-exit-endpoint-review.md",
+      "resume_state_key": "initial_top10_repeated_exit_endpoint_review_v1",
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 28,
+        "bridge_attempts": 2,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 2,
+        "primary_documentation_lookups": 3
+      },
+      "canonical_inserted": {
+        "onchain_trades": 0,
+        "wallet_trace_edges": 19
+      },
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "source_coverage": "8FXfixed60d_native+singleUSDCATA_queriesclosed; otherassets/wholewalletpartial",
+      "cap_status": "pending_cap",
+      "beneficial_ownership": "unknown",
+      "common_customer_cex": "sameexactBinance-labelleddeposit8eHf/55n verified; customeridentity/exclusivityunknown; directmainunobserved"
+    },
+    "latest_linked_wallet_prebuy_chronology_review": {
+      "batch_id": "top10-60d-20261008-v1-batch013",
+      "status": "closed_linked_wallet_prebuy_chronology_review",
+      "completed_at_utc": "2026-10-08T09:08:38.280Z",
+      "closed_at_utc": "2026-10-08T09:09:09.429Z",
+      "review_raw_payload_id": 2591,
+      "evidence_raw_payload_id": 2590,
+      "report_raw_payload_id": 2592,
+      "report": "docs/top10-linked-wallet-prebuy-chronology.md",
+      "resume_state_key": "initial_top10_linked_wallet_prebuy_chronology_v1",
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 20,
+        "bridge_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 3,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 3,
+        "primary_documentation_lookups": 2
+      },
+      "canonical_inserted": {
+        "onchain_trades": 30,
+        "wallet_trace_edges": 0
+      },
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "source_coverage": "8e1740native/497STONKATA/31K5ATA;2TfK5ATA2 andEH8nativefooterclosed;allassets/publicexposurepartial",
+      "cap_status": "pending_cap unchanged; STONKdeprioritized >1Mhourlycontext; DARKmissinghistorical",
+      "beneficial_ownership": "unknown",
+      "common_customer_cex": "reuse012 exact8FX linked8e/55n; customeridentity/mainmatch/lotunknown",
+      "role_corrections": "3ZLek NEAR/wNEAR, not6GmSTONK;3verifiedofficialrewardpayouts;1mixedCARDSrouteexcluded"
+    },
+    "latest_same_wallet_thesis_exit_review": {
+      "batch_id": "top10-60d-20261008-v1-batch014",
+      "canonical_inserted": {
+        "onchain_trades": 0,
+        "wallet_trace_edges": 17
+      },
+      "completed_at_utc": "2026-10-08T11:50:29.764Z",
+      "conclusions": {
+        "7kHo_intersection_nonzero_owner_token_deltas": 0,
+        "7kHo_native_history_partial_rows": 200,
+        "7kHo_retained_Solstice_thesis_mints": 16,
+        "DARK_incremental_end_exclusive_utc": "2026-10-08T11:03:14Z",
+        "ZEC_distribution_credits": 58,
+        "ZEC_paid_buys": 0,
+        "ZEC_quote_net_USDT_raw": "396777742",
+        "actual_transfers_added": 17,
+        "core_pattern": "Related same separate wallet actual paid BUY and positive inventory before associated author THESIS then samewallet SELL/quote after; no main transfer required",
+        "historical_cap": "pending for candidates; no new eligible tokenwide/BQ",
+        "new_bidirectional_connection": {
+          "USDC_main_to_linked_count": 13,
+          "amount_raw": "169629012018",
+          "main": "4ugDhHJ8XDXAeABmrNmGffFaLbJb9BkPyiFGVSV9ocwo",
+          "owner": "7kHoDVivC5b9JJN4WArSw2ssc2u5mZBjcy2cobJn7nAF",
+          "return_count": 2,
+          "return_raw": "11740325990"
+        },
+        "not_all_hidden_wallet_absence": true,
+        "ownership_intent_customer_cex_PnL": "unknown",
+        "qualifying_best_pattern_in_examined_scope": 0,
+        "source_2KNo_DARK_thesis_balance_raw": "5068289664",
+        "source_post_thesis_sell_observed": 0,
+        "trades_or_wallet_promotions": 0
+      },
+      "evidence_raw_payload_id": 2636,
+      "frontier": [
+        {
+          "budget": "new global reservation required",
+          "closed_USDC_account_reuse": [
+            2625,
+            2626,
+            2630
+          ],
+          "cursor": "443784815:369",
+          "owner": "7kHoDVivC5b9JJN4WArSw2ssc2u5mZBjcy2cobJn7nAF",
+          "partial_observed_end_utc": "2026-09-02T20:10:53Z",
+          "priority": 1,
+          "raw_refs": [
+            2627,
+            2628
+          ],
+          "task": "Complete new actually bidirectional7kHo known-owner history from saved cursor; inspect historical owner final token balances and native wrap/unwrap, stake/position alternatives before selecting exact target ATA. Match same Solstice author/mint only; not13USDCtransfers=13buys."
+        },
+        {
+          "no_top100_expansion": true,
+          "priority": 2,
+          "task": "Original10 historicalcap<=1M event with actual external buyer: use existing eligible ARTHUR event/buyers and known nonservice links. Resolve missing public provenance/cap for linked cases; tokenwide/BQ only approved event, dryrun/cap. MainBUY-only remains background."
+        },
+        {
+          "bridge_raw": 2621,
+          "browser_challenge_raw_refs": [
+            2617,
+            2622,
+            2624,
+            2629
+          ],
+          "priority": 3,
+          "role": "unknown",
+          "task": "New7kHo/7X7g/7Uh role and exactcustomer endpoint assertions when browser accessible; compare actual exact address with linked buyers/main; do not scan pooled125281USDC toattribute Solstice lots."
+        },
+        {
+          "last_incremental_raw": 2608,
+          "priority": 4,
+          "task": "Known complete DARK Ctm/2KNo fixedquery reuse. Source2KNo next activity after2026-10-08T11:03:14Z needs distinct incremental task only if relevant; do not redo checkedfixed/history. Qualifying sourcepostTHESISSELL stillunobserved."
+        },
+        {
+          "DET_USDC_cursor": "444718695:228",
+          "DET_raw_refs": [
+            2597,
+            2598,
+            2599,
+            2600
+          ],
+          "F5hk_cursor": "439912001:1347",
+          "F5hk_query_end_exclusive_epoch": 1791315990,
+          "Solstice_cursor": "442507788:1244",
+          "Solstice_query_end_exclusive_epoch": 1791137640,
+          "Top100": "parked",
+          "priority": 5,
+          "standalone_RZD": "parked",
+          "task": "Missing original10 foundation cursors; exact query/account completeness distinct from entire60d."
+        }
+      ],
+      "protected_old_states": 46,
+      "report_document": "docs/top10-same-wallet-thesis-exit-review.md",
+      "review_raw_payload_id": 2637,
+      "source_usage": {
+        "bigquery_dry_run_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bridge_attempts": 1,
+        "chrome_direct_navigations": 5,
+        "direct_rpc_attempts": 30,
+        "fomo_credits": 0,
+        "fomo_http_attempts": 0,
+        "market_data_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "primary_documentation_lookups": 0
+      },
+      "status": "closed_same_separate_wallet_thesis_exit_review",
+      "worker_raw_payload_ids": [
+        2631,
+        2632,
+        2633,
+        2634,
+        2635
+      ],
+      "report_raw_payload_id": 2639,
+      "report_markdown_sha256": "5446c3666a694761b4c379e169bec3592ae865e6d6a4c348a0cf332f18b724d9",
+      "report": "docs/top10-same-wallet-thesis-exit-review.md",
+      "resume_state_key": "initial_top10_same_wallet_thesis_exit_review_v1",
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max",
+      "closed_at_utc": "2026-10-08T11:51:17.064Z",
+      "superseded_report_raw_payload_ids": [
+        2638
+      ]
+    },
+    "latest_ember_linked_wallet_review": {
+      "batch_id": "top10-60d-20261008-v1-batch015",
+      "canonical_inserted": {
+        "onchain_trades": 48,
+        "wallet_trace_edges": 2
+      },
+      "completed_at_utc": "2026-10-08T13:36:20.162Z",
+      "conclusions": {
+        "7kHo_additional_signature_rows": 487,
+        "7kHo_exact_Solstice_thesis_mint_delta_rows": 0,
+        "7kHo_none420_in_balanceChanged907": true,
+        "EMBER_THESIS_inventory_raw": "19051856068051",
+        "EMBER_ending_inventory_raw": "19068137887338",
+        "EMBER_main_transfer_decimals": 6,
+        "EMBER_main_transfer_raw": "24544027145194",
+        "EMBER_recipient_paid_BUY_observed": 0,
+        "EMBER_recipient_sell_after_THESIS_in_closed_exact_ATA_query": 0,
+        "EMBER_sale_net_USDC_raw": "68606877089",
+        "EMBER_same_recipient_actual_sells_before_THESIS": 48,
+        "EMBER_sold_raw": "5500000000000",
+        "EMBER_source_transfer_before_THESIS_seconds": 8876,
+        "cap_status": "pending_cap; no new market/tokenwide/BQ",
+        "native_fill_context_SOL_transfer_raw": "266229811009",
+        "new_actual_author_linked_separate_wallet": "4j9kCRiUzPJ954qh8MQV4idnJB2HQ4daaNn4R6SrTBpL",
+        "ownership_service_role_customer_CEX_PnL": "unknown",
+        "quote_direct_unknown_recipient_outflow_raw": "14200000000",
+        "quote_ending_USDC_raw": "1100",
+        "strict_best_pattern_in_examined_scope": 0
+      },
+      "evidence_raw_payload_id": 2680,
+      "frontier": [
+        {
+          "historical_cap": "pending_cap",
+          "known_closed_USDC_ATA_raws": [
+            2669,
+            2670
+          ],
+          "known_closed_token_ATA_raws": [
+            2663,
+            2664,
+            2666
+          ],
+          "native_receipt_context_locator": "/response/result/data/64",
+          "native_receipt_context_raw": 2669,
+          "owner": "4j9kCRiUzPJ954qh8MQV4idnJB2HQ4daaNn4R6SrTBpL",
+          "ownership": "unknown",
+          "priority": 1,
+          "task": "New actually author-linked EMBER wallet 4j9: known owner native SOL and tokenAccounts balanceChanged history, existing positions and paid acquisition of other exact original10 tokens; follow native SOL after the verified Sept30 Fill, compare real nonservice returns and exact customer CEX. New global reservation; no new whole-token market scan until cap eligible."
+        },
+        {
+          "bridge_raw": 2673,
+          "direct_source_rpc_raw": 2672,
+          "owner": "7tpQy8SiHiM9PSqrRnCjzZFxPNVJkGvu4kDD74vcQaJQ",
+          "priority": 2,
+          "role": "unknown",
+          "source_indexed_raw": 2669,
+          "task": "Resolve exact 14200 USDC recipient role and bounded actual onward flow only; no pooled/service attribution. Compare same exact chain/address customer endpoints of author and paid buyers."
+        },
+        {
+          "cursor": "447417753:325",
+          "last_observed_epoch": 1789528539,
+          "new_raws": [
+            2651,
+            2653,
+            2654,
+            2657,
+            2658,
+            2659,
+            2660,
+            2661
+          ],
+          "owner": "4ugDhHJ8XDXAeABmrNmGffFaLbJb9BkPyiFGVSV9ocwo",
+          "priority": 3,
+          "query_complete": false,
+          "query_end_exclusive_epoch": 1791137640,
+          "query_start_epoch": 1786164221,
+          "task": "Continue existing Solstice owner prefix after new 700 rows; original query end preserved, then separate missing tail to fixed cutoff. Inspect genuine same-thesis-token nonservice supplies and paid buys; not tiny platform fee counterparties."
+        },
+        {
+          "balanceChanged_raws": [
+            2645,
+            2646,
+            2647,
+            2648,
+            2649,
+            2650
+          ],
+          "native_none_raws": [
+            2627,
+            2628,
+            2640,
+            2641,
+            2642,
+            2643
+          ],
+          "owner": "7kHoDVivC5b9JJN4WArSw2ssc2u5mZBjcy2cobJn7nAF",
+          "priority": 4,
+          "task": "Reuse completed 7kHo owner none420/balanceChanged907 and USDC174 captures. No retained Solstice exact16THESISmint occurrence or delta; lower priority unless new actual connection. No repeat closedcaptures."
+        },
+        {
+          "DARK_last_incremental_raw": 2608,
+          "DET_USDC_cursor": "444718695:228",
+          "F5hk_cursor": "439912001:1347",
+          "F5hk_query_end_epoch": 1791315990,
+          "priority": 5,
+          "task": "Other original10 cursors and genuinely eligible ARTHUR alternative; DARK2KNo source after last checked incremental only a distinct incremental task; standaloneRZD/Top100 parked."
+        }
+      ],
+      "protected_old_states": 47,
+      "report_document": "docs/solstice-ember-linked-wallet-trace.md",
+      "review_raw_payload_id": 2681,
+      "source_usage": {
+        "bigquery_dry_run_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bridge_attempts": 2,
+        "chrome_direct_navigations": 2,
+        "direct_rpc_attempts": 30,
+        "fomo_credits": 0,
+        "fomo_http_attempts": 0,
+        "market_data_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "primary_documentation_lookups": 2
+      },
+      "status": "closed_linked_EMBER_transfer_and_pre_THESIS_sell_review",
+      "worker_raw_payload_ids": [
+        2675,
+        2676,
+        2677,
+        2678,
+        2679
+      ],
+      "report_raw_payload_id": 2682,
+      "report_markdown_sha256": "d9c88f8f9d92d78cd23e6eb2afb044c3e14541b051767f2ca4bce7d108b30f12",
+      "report": "docs/solstice-ember-linked-wallet-trace.md",
+      "resume_state_key": "initial_top10_ember_linked_wallet_review_v1",
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max"
+    },
+    "latest_ember_recovery_and_repetition_review": {
+      "batch_id": "top10-60d-20261009-v1-batch016",
+      "completed_at_utc": "2026-10-08T18:10:31.771Z",
+      "status": "closed_EMBER_native_convergence_and_repetition_review",
+      "evidence_raw_payload_id": 2714,
+      "worker_raw_payload_ids": [
+        2709,
+        2710,
+        2711,
+        2712,
+        2713
+      ],
+      "report_document": "docs/solstice-ember-recovery-review.md",
+      "canonical_inserted": {
+        "onchain_trades": 9,
+        "wallet_trace_edges": 9
+      },
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 22,
+        "bridge_attempts": 2,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 2,
+        "primary_documentation_lookups": 0
+      },
+      "frontier": [
+        {
+          "priority": 1,
+          "task": "Other original10 missing foundations and approved <=1M events: continue existing F5hk/DET/Solstice cursors under a fresh reservation; select actual author-linked separate paid buyer before new tokenwide scan. Main preTHESIS BUY is context only.",
+          "F5hk_cursor": "439912001:1347",
+          "F5hk_query_end_epoch": 1791315990,
+          "DET_USDC_cursor": "444718695:228",
+          "Solstice_cursor": "447417753:325",
+          "Solstice_query_end_epoch": 1791137640,
+          "historical_cap_gate": "circulating_USD<=1000000"
+        },
+        {
+          "priority": 2,
+          "task": "Common exact Solana8zH hub role: use captured four incoming-to-forward 3sec paths; browser access gap needs label assertion or exact individual order proof. No repeat completed61min queries or pooled hub flow attribution; shared hub is not shared customer deposit.",
+          "address": "8zHcWujHhyJri3CRTcWUGmT5WSRdwW7xrns3WTTkPGvS",
+          "role": "unknown",
+          "source_raws": [
+            2694,
+            2696,
+            2698,
+            2700
+          ],
+          "representative_direct_rpc_raws": [
+            2706,
+            2707,
+            2708
+          ],
+          "resolver_raws": [
+            2702,
+            2703
+          ],
+          "browser_gap_raw": 2704
+        },
+        {
+          "priority": 3,
+          "task": "Bounded actual onward14,200USDC recipient7tp role/customer endpoint only if relevant connection emerges; source2672 andnot_bridge2673 reused. No presumed private/CEX role.",
+          "address": "7tpQy8SiHiM9PSqrRnCjzZFxPNVJkGvu4kDD74vcQaJQ",
+          "source_rpc_raw": 2672
+        },
+        {
+          "priority": 4,
+          "task": "Lower priority4j9 EMBER: same-wallet paidBUY0/postTHESISSELL0 in closed knownaccount scope. Resume only distinct incremental after1791481457 or actual relevant new link; snapshot2683 is separate, no repeat fixedATA/mainATA/owner204 captures.",
+          "owner": "4j9kCRiUzPJ954qh8MQV4idnJB2HQ4daaNn4R6SrTBpL",
+          "incremental_end_exclusive_epoch": 1791481457,
+          "closed_owner_raws": [
+            2687,
+            2688,
+            2689
+          ],
+          "closed_main_ATA_raws": [
+            2691,
+            2692
+          ],
+          "cap": "pending_cap"
+        },
+        {
+          "priority": 5,
+          "task": "Reuse DARK2KNo prior fixed/query proof; no afterTHESIS SELL in prior checkedincremental. Distinct incremental only. Closed7kHo lower priority without genuine sameauthor/token link; standaloneRZD/Top100 remainparked.",
+          "DARK_last_incremental_raw": 2608,
+          "7kHo_closed_owner_footer_raw": 2650
+        }
+      ],
+      "conclusions": {
+        "main_paid_BUY_count": 9,
+        "main_paid_USDC_debit_raw": "70320700485",
+        "main_native_funding_to_related_raw": "300000000",
+        "common_SOL_endpoint": "8zHcWujHhyJri3CRTcWUGmT5WSRdwW7xrns3WTTkPGvS",
+        "native_outflow_raw": "459800000000",
+        "native_forward_raw": "459799980000",
+        "each_forward_delay_seconds": 3,
+        "same_separate_paid_BUY_thesis_after_SELL_pattern_observed": 0,
+        "same_original10_other_mint_repetition_observed": 0,
+        "owner_retained_EMBER_raw": "19068137887338",
+        "cap": "pending_cap",
+        "ownership_CEX_customer_PnL": "unknown"
+      },
+      "protected_old_states": 48,
+      "review_raw_payload_id": 2715,
+      "report_raw_payload_id": 2716,
+      "report_markdown_sha256": "82aab8a57125d24219c2dc4a92b881e04f156e2c53c64de8358fb29e08f027b0",
+      "report": "docs/solstice-ember-recovery-review.md",
+      "resume_state_key": "initial_top10_ember_recovery_and_repetition_review_v1",
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max"
+    },
+    "latest_remaining_foundation_and_prethesis_exit_review": {
+      "batch_id": "top10-60d-20261009-v1-batch017",
+      "completed_at_utc": "2026-10-08T18:58:04.067Z",
+      "status": "closed_remaining_foundation_and_preTHESIS_exit_review",
+      "evidence_raw_payload_id": 2748,
+      "worker_raw_payload_ids": [
+        2743,
+        2744,
+        2745,
+        2746,
+        2747
+      ],
+      "report_document": "docs/top10-theveeman-inj-and-source-review.md",
+      "canonical_inserted": {
+        "onchain_trades": 191,
+        "wallet_trace_edges": 3
+      },
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 25,
+        "bridge_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 0,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0,
+        "chrome_direct_navigations": 1,
+        "primary_documentation_lookups": 0
+      },
+      "frontier": [
+        {
+          "priority": 1,
+          "task": "Original10 same-author exacttoken actual separatepaidBUY beforepublic and samewallet afterSELL. Complete bounded foundations from actual savedcursor, select prospective lowcap case before broader market. No upgrade mainBUY-only/gifts/sharedsigner; historicalcirculating<=1M required for newtokenwide/BQ.",
+          "F5hk_fixed_cursor": "441923169:896",
+          "F5hk_fixed_query_end": 1791315990,
+          "Solstice_cursor": "448517037:894",
+          "Solstice_query_end": 1791137640,
+          "DET_USDC_cursor": "444844361:1237",
+          "DET_query_end": 1791348221
+        },
+        {
+          "priority": 2,
+          "task": "F5hk exact INJ ATA2739/2740 isclosed; buy/sellbothbeforeTHESIS. Do not repeat. Independent2741/2742. Separateowner3day INJcontext cursor450447782:670 remains partial atfixed3dayend1790467200; continue onlyif genuine external link warrants.",
+          "no_identity_from_shared_Agm_signer": true,
+          "INJ_cap": "notverified"
+        },
+        {
+          "priority": 3,
+          "task": "Retained F5 STONK two actualhistoricalsourceaddresses and3transfers. Store roleunknown; no paidbuyer orsharedcustomer proof. No new sourcewallet/marketwide scan under above1M context; reconsider only historicalcirculatingcap approved or reuse retained sourcepaidbuy evidence.",
+          "repeated_source": "8NkMzBchjoxyABfX4kiZoAGtMBRog6iNp9KuwhucTHNd",
+          "source_ATA": "B8Cgk3pqaJ8RnFsZpnNFCm7R2xQo3FQeg8ie69bSEkqw",
+          "existing_raws": [
+            2606,
+            2612,
+            2737
+          ],
+          "browser_gap_raw": 2738
+        },
+        {
+          "priority": 4,
+          "task": "Reuse other original10 evidence. Econoar7sQ CARDS remains candidate/ambiguous; no sameauthor publicBUY/THESIS established. Werey ARTHUR eligible mainonly,63buyer slice no linked separatepaidbuyer. Seekactual author-link beforenew wholemarket scan. RunningClam403 andNodit401 remainauthgaps, no same-key retries."
+        },
+        {
+          "priority": 5,
+          "task": "Prior EMBER and7kHo knownaccount capturesclosed; service8zH roleunknown, no pooledattribution. DARK2KNo distinctincremental onlyafterlastchecked; standaloneRZD andTop100parked.",
+          "EMBER_incremental_end": 1791481457,
+          "DARK_prior_incremental_raw": 2608
+        }
+      ],
+      "conclusions": {
+        "INJ_main_BUY_sec_before_THESIS": 74,
+        "INJ_main_SELL_sec_before_THESIS": 37,
+        "INJ_remaining_token_raw": "1794773",
+        "INJ_decimals": 9,
+        "INJ_exactATA_closed_postTHESIS_SELL": 0,
+        "F5_actual_historical_source_transfer_count": 3,
+        "source_owner_count": 2,
+        "source_acquisition_ownership_role": "unknown",
+        "THICC_main_BUY_before_THESIS": 179,
+        "THICC_main_BUY_after_THESIS": 10,
+        "strict_separate_paidBUY_hold_public_afterSELL_case": 0,
+        "historical_cap_CEX_customer_PnL": "notverified"
+      },
+      "protected_old_states": 49,
+      "review_raw_payload_id": 2749,
+      "report_raw_payload_id": 2751,
+      "report_markdown_sha256": "0e23d476140446adaac27b55623312fbd0b2991579d948b5761ad945513e1476",
+      "report": "docs/top10-theveeman-inj-and-source-review.md",
+      "resume_state_key": "initial_top10_remaining_foundation_and_prethesis_exit_review_v1",
+      "worker_count": 5,
+      "workers_reused": true,
+      "worker_model": "gpt-6-luna",
+      "worker_reasoning_effort": "max"
+    }
+  },
+  "latest_original_top10_execution": {
+    "batch_id": "top10-60d-20261010-v1-batch062",
+    "status": "closed_bounded_Werey_PURR_paid_inventory_exit_and_fee_alternative_review",
+    "completed_at_utc": "2026-10-10T02:27:45.156Z",
+    "evidence_raw_payload_id": 4057,
+    "source_cap_review_raw_payload_id": 4056,
+    "worker_raw_payload_ids": [
+      4053,
+      4054,
+      4055
+    ],
+    "source_usage": {
+      "fomo_http_attempts": 0,
+      "fomo_credits": 0,
+      "direct_rpc_attempts": 12,
+      "bridge_attempts": 0,
+      "nodit_indexed_attempts": 0,
+      "market_data_attempts": 3,
+      "bigquery_paid_queries": 0,
+      "bigquery_dry_run_attempts": 0,
+      "bigquery_metadata_calls": 0,
+      "chrome_direct_navigations": 2,
+      "primary_documentation_lookups": 0
+    },
+    "canonical_inserted": {
+      "wallet_trace_edges": 1,
+      "onchain_trades": 0,
+      "fomo_events": 0
+    },
+    "strict_lowcap_case_count": 0,
+    "historical_cap": "pending_cap",
+    "owner": "unknown",
+    "PnL": "unknown",
+    "report_document": "docs/werey-funded-wallet-inventory-and-cex-review.md",
+    "frontier": [
+      {
+        "priority": 1,
+        "task": "Before new PURR-wide collection, obtain independently useful historical circulating-supply/cap evidence for exact mint8RNU at9/15TH or realBUY. Pool prices4043/44 and currentnullmarketcap do not establish≤1M. No repeatCoinGecko404/currentFDV substitution."
+      },
+      {
+        "priority": 2,
+        "task": "Seek additional ordinary Werey↔F1b principal/return or exactsame privatecustomer endpoint across unqueried assets/chains only when concrete new evidence exists. MainUSDC47612/F1bowner2712/PURR82/footer/6vy43closed; do not replay. Co-sponsorAgmL, transactionfees, sharedBinance/Relay do not establish owner."
+      },
+      {
+        "priority": 3,
+        "task": "DXAh exactUSDC postreceipt first400 remains partial at452267420:933; ownerpostreceipt138 also partial at454117922:263. Resume only for meaningful nonservice connection. IndividualDXAh1000USDCRelaydeposit3VDU remains unmapped; never pooledfanout/10USDC attribution."
+      },
+      {
+        "priority": 4,
+        "task": "3TW6 exactowner11 andUSDC19/footerclosed. 6.7ordinaryreturn and115forward→ARTHURbuy are documented, noPURR/SI exposure in these captures. Do not broaden this branch as PURRhiddenwallet without actualsame-token evidence. OriginalTop10public/cap gaps remain; no RZD/Top100 expansion."
+      }
+    ],
+    "scope_exhausted": false,
+    "goal_tool_status_at_start": "paused",
+    "work_authorization": "explicit user: 그쪽으로 더 파봐",
+    "browser_connection": "recovered",
+    "review_raw_payload_id": 4058,
+    "report_raw_payload_id": 4059
+  }
+}

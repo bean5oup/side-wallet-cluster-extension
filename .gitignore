@@ -1,0 +1,17 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Locally collected data and databases
+/data/raw/
+/data/normalized/
+/data/research/
+*.sqlite
+*.sqlite3
+*.db
+
+# Local tooling
+.DS_Store
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,129 @@
+{
+  "template_only": true,
+  "policy_version": "top100-lowcap-1m-v2",
+  "batch_id": null,
+  "task_id": null,
+  "worker_id": null,
+  "worker_model": "gpt-6-luna",
+  "stage": null,
+  "cohort": {
+    "period": "30d",
+    "leaderboard_raw_payload_id": 1654,
+    "snapshot_at_utc": "2026-10-07T00:29:19.532Z",
+    "rank_min_inclusive": 1,
+    "rank_max_inclusive": 100,
+    "identity_field": "fomo_user_id",
+    "all_time_raw1655_is_separate": true
+  },
+  "historical_window": {
+    "start_utc_inclusive": "2026-08-08T04:43:41Z",
+    "end_utc_exclusive": "2026-10-07T04:43:41Z",
+    "incremental_requires_separate_task": true,
+    "lookback_days": 60,
+    "duration_seconds": 5184000,
+    "anchor_mode": "freeze_end_at_campaign_start",
+    "subtasks_share_same_window": true,
+    "requires_explicit_coverage_and_gap_reporting": true
+  },
+  "fomo_user_ids": [],
+  "token_event_targets": [],
+  "token_target_required_fields": [
+    "chain_id",
+    "token_address",
+    "anchor_type",
+    "anchor_key",
+    "reference_at_utc",
+    "reference_time_basis",
+    "cap_decision",
+    "historical_circulating_market_cap_usd",
+    "cap_evidence_refs",
+    "window_start_utc",
+    "window_end_utc",
+    "pool_addresses_or_discovery_scope"
+  ],
+  "existing_evidence_refs": [],
+  "network_calls_allowed": false,
+  "allowed_source_routes": [],
+  "reserved_limits": {
+    "fomo_http_attempts": 0,
+    "fomo_credits": 0,
+    "direct_rpc_attempts": 0,
+    "bridge_attempts": 0,
+    "nodit_indexed_attempts": 0,
+    "market_data_attempts": 0,
+    "bigquery_queries": 0,
+    "bigquery_maximum_bytes_billed_per_query": null
+  },
+  "canonical_database_read_only": "data/research/fomo.sqlite3",
+  "worker_output_directory": null,
+  "raw_output_directory": null,
+  "required_outputs": [
+    "result.json",
+    "normalized.jsonl",
+    "report.md"
+  ],
+  "worker_mutations_allowed": [
+    "own_output_directory",
+    "own_raw_directory"
+  ],
+  "missing_or_invalid_packet_action": "return_needed_fields_to_primary_without_network_calls",
+  "result_required_fields": [
+    "policy_version",
+    "batch_id",
+    "task_id",
+    "cohort_raw_payload_id",
+    "scope",
+    "status",
+    "counts",
+    "cap_decisions",
+    "observations",
+    "candidate_clusters",
+    "candidate_edges",
+    "evidence_refs",
+    "retrieval_status",
+    "history_coverage_status",
+    "gaps",
+    "actual_usage",
+    "unused_reservation",
+    "next_frontier",
+    "requested_history_days",
+    "observed_history_start_utc",
+    "observed_history_end_utc",
+    "history_gaps",
+    "anchor_timeline",
+    "pre_buy_candidates",
+    "post_signal_followers",
+    "actual_swap_review_status",
+    "public_visibility_status"
+  ],
+  "historical_collection_targets": {
+    "fomo_public_and_trade_events_days": 60,
+    "eligible_token_wallet_history_days": 60,
+    "market_discovery_windows_are_prioritized_slices_not_full_history": true,
+    "provider_retention_is_not_guaranteed": true,
+    "continue_pagination_in_later_budgeted_batches": true
+  },
+  "worker_reasoning_effort": "max",
+  "worker_spawn_parameters": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "max",
+    "fork_turns": "none"
+  },
+  "buy_target_additional_required_fields": [
+    "fomo_event_id",
+    "fomo_buy_source_at_utc",
+    "actual_swap_review_status",
+    "actual_swap_at_utc",
+    "actual_swap_evidence_refs",
+    "public_visibility_at_utc",
+    "public_visibility_status",
+    "same_author_retained_thesis_keys"
+  ],
+  "buy_target_rules": {
+    "thesis_required": false,
+    "historical_circulating_cap_max_usd_inclusive": "1000000",
+    "actual_swap_review_required_before_deep_onchain_task": true,
+    "null_public_visibility_is_unknown_not_capture_time": true,
+    "initial_inventory_is_provisional_not_eligible": true
+  }
+}
