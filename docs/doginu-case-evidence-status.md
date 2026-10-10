@@ -90,3 +90,8 @@ Fomo 본지갑에 실제 bridge로 연결된 Hypercore d1c는 별도 대조했�
 ## 배치058 후속 확인 — 동일 주소의 새 라벨·공급자 경로
 
 [공통 Binance 라벨 주소 보고서](doginu-supplier-solana-binance-deposit-review.md): 현재 Arkham raw4005가 exact Solana8zHc를 Binance Deposit으로 표시한다. DOGINU 공급자3Hp→3Nyy→같은8zHc1.269190999SOL 경로를 독립RPC4006/4007로 확인했다. 서로 다른 중간주소가 같은 수령주소로 모인 사실이며, 같은 개인·CEX고객·DOGINU 게시후 수익의 증명이 아니다. 이전 당시 라벨 미확보 기록은 유지한다.
+
+
+## 배치063 독립 근거와 역할 보강
+
+[두 사례 후속](two-case-supplier-role-and-cap-followup-ko.md): DOGINU 공급자의0.8SOL 매수→본지갑/별도주소 배분→잔여 매도를 독립RPC4065–4068로 검증했다. Werey8k/200 일반 송금은4074/4075로 첫 독립 대조했고 PURR genesis1B/권한폐기4063/64를 확보했다. 두 토큰 공식reward·launchairdrop=null은 이후보상/수동분배 부재가 아니다. PURR 역사circ에 큰 공백·DOG 공식peak909.8k도 방법미상이라cap보류/엄격완결0. 개인owner·같은customerendpoint·PnL은미확정. 근거4082/검토4083/cap4081/보고서4084; RPC9/문서탐색6/Chrome2, 경제중복추가0/state95→96.

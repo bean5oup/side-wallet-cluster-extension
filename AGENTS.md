@@ -1,8 +1,12 @@
 # Fomo 연구 에이전트 지침
 
+## 최신 배치063 — 두 사례 독립 근거·공급자 역할·시총 조건
+
+[두 사례 후속](docs/two-case-supplier-role-and-cap-followup-ko.md): DOGINU 공급자의0.8SOL 매수→본지갑/별도주소 배분→잔여 매도를 독립RPC4065–4068로 검증했다. Werey8k/200 일반 송금은4074/4075로 첫 독립 대조했고 PURR genesis1B/권한폐기4063/64를 확보했다. 두 토큰 공식reward·launchairdrop=null은 이후보상/수동분배 부재가 아니다. PURR 역사circ에 큰 공백·DOG 공식peak909.8k도 방법미상이라cap보류/엄격완결0. 개인owner·같은customerendpoint·PnL은미확정. 근거4082/검토4083/cap4081/보고서4084; RPC9/문서탐색6/Chrome2, 경제중복추가0/state95→96.
+
 ## PPT 작성 전 종합 보고서 — 2026-10-10
 
-[한글 보고서](docs/pre-ppt-linked-wallet-research-report-ko.md). 배치062까지 저장된 자료로 Werey/PURR·Solstice/DOGINU의 실제 연결·게시 전 재고·게시 후 매도·CEX 경로와 비교 사례, 정확 주소·대표 거래, 발표 가능한 주장·미확정 항목을 종합했다. 신규 수집·경제 데이터·frontier 변경은 없으며, strict 저시총 완결0·소유/최초 공개/실현 수익 미확정을 유지한다. PPT 작성 시 과거 초기 라벨보다 이 보고서의 후속 역할 판정을 우선하고, 새 연구 실행은 아래 최신 배치062와 기존 frontier를 따른다.
+[한글 보고서](docs/pre-ppt-linked-wallet-research-report-ko.md). 배치062까지 저장된 자료로 Werey/PURR·Solstice/DOGINU의 실제 연결·게시 전 재고·게시 후 매도·CEX 경로와 비교 사례, 정확 주소·대표 거래, 발표 가능한 주장·미확정 항목을 종합했다. 신규 수집·경제 데이터·frontier 변경은 없으며, strict 저시총 완결0·소유/최초 공개/실현 수익 미확정을 유지한다. PPT 작성 시 과거 초기 라벨보다 이 보고서의 후속 역할 판정을 우선하고, 새 연구 실행은 최신 배치063과 기존 frontier를 따른다.
 
 ## 최신 배치062 — Werey/PURR 유상 재고 전량 매도·소액 상대 검토
 

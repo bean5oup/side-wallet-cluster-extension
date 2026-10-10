@@ -605,3 +605,8 @@ Solana BigQuery는 collection/page/source row 3/38/23,533행(행 역할 간 sign
 ## 2026-10-10 Werey/PURR 후속 검토
 
 [Werey/PURR 후속](docs/werey-funded-wallet-inventory-and-cex-review.md), 근거4057/검토4058/cap4056/보고서4059. TH재고1233646.646503316중paid-origin최소1233631.919863633·post추가분합=15SELL1391629.403862688/final0. PostSELL15196.643524USDC는cashflow notPnL. 3TW6→F1b6.7plain새edge/115받아21s후다른mintARTHUR BUY·0.2375same-swapfee; exactowner11/USDC19/footer닫힘. DXAhUSDC400prefix未/226smallcredits224swap+sponsor→fee/referral대안;1000Relayorder未. PURR2historicalbars첫확보4043/44 butcircunknown/pendingcap/strict0. RPC12Chrome2market3others0. Old94states11wallet4569trade645edges보존→state95edge646. Goaltoolpaused상태기록/명시user작업허용·Chrome회복/전체소진아님. Nexthistoricalcap·추가ordinaryprincipal/exactprivateendpoint;closed/service/RZDTop100반복금지.
+
+
+## 2026-10-10 두 사례 후속 조사
+
+[두 사례 후속](two-case-supplier-role-and-cap-followup-ko.md): DOGINU 공급자의0.8SOL 매수→본지갑/별도주소 배분→잔여 매도를 독립RPC4065–4068로 검증했다. Werey8k/200 일반 송금은4074/4075로 첫 독립 대조했고 PURR genesis1B/권한폐기4063/64를 확보했다. 두 토큰 공식reward·launchairdrop=null은 이후보상/수동분배 부재가 아니다. PURR 역사circ에 큰 공백·DOG 공식peak909.8k도 방법미상이라cap보류/엄격완결0. 개인owner·같은customerendpoint·PnL은미확정. 근거4082/검토4083/cap4081/보고서4084; RPC9/문서탐색6/Chrome2, 경제중복추가0/state95→96.

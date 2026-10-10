@@ -212,63 +212,63 @@
     }
   },
   "last_execution": {
-    "batch_id": "top10-60d-20261010-v1-batch062",
-    "status": "closed_bounded_Werey_PURR_paid_inventory_exit_and_fee_alternative_review",
-    "completed_at_utc": "2026-10-10T02:27:45.156Z",
-    "evidence_raw_payload_id": 4057,
-    "source_cap_review_raw_payload_id": 4056,
+    "batch_id": "top10-60d-20261010-v1-batch063",
+    "status": "closed_bounded_two_case_independent_proof_and_launch_role_followup",
+    "completed_at_utc": "2026-10-10T06:44:14.318Z",
+    "evidence_raw_payload_id": 4082,
+    "source_cap_review_raw_payload_id": 4081,
     "worker_raw_payload_ids": [
-      4053,
-      4054,
-      4055
+      4077,
+      4078,
+      4079,
+      4080
     ],
     "source_usage": {
       "fomo_http_attempts": 0,
       "fomo_credits": 0,
-      "direct_rpc_attempts": 12,
+      "direct_rpc_attempts": 9,
       "bridge_attempts": 0,
       "nodit_indexed_attempts": 0,
-      "market_data_attempts": 3,
-      "bigquery_paid_queries": 0,
-      "bigquery_dry_run_attempts": 0,
-      "bigquery_metadata_calls": 0,
+      "market_data_attempts": 0,
       "chrome_direct_navigations": 2,
-      "primary_documentation_lookups": 0
+      "primary_documentation_lookups": 6,
+      "bigquery_paid_queries": 0,
+      "bigquery_dry_run_attempts": 0
     },
     "canonical_inserted": {
-      "wallet_trace_edges": 1,
+      "wallet_trace_edges": 0,
       "onchain_trades": 0,
       "fomo_events": 0
     },
     "strict_lowcap_case_count": 0,
-    "historical_cap": "pending_cap",
+    "historical_cap": "pending_cap / pending_cap_proxy",
     "owner": "unknown",
     "PnL": "unknown",
-    "report_document": "docs/werey-funded-wallet-inventory-and-cex-review.md",
+    "report_document": "docs/two-case-supplier-role-and-cap-followup-ko.md",
     "frontier": [
       {
         "priority": 1,
-        "task": "Before new PURR-wide collection, obtain independently useful historical circulating-supply/cap evidence for exact mint8RNU at9/15TH or realBUY. Pool prices4043/44 and currentnullmarketcap do not establish≤1M. No repeatCoinGecko404/currentFDV substitution."
+        "task": "DOGINU: exact historical cap/price method and source distribution purpose. Use retained genesis1B ceiling + completed single-pool high435103.58 context + official peak909822 assertion; independently establish event-specific circulation/market price before cap admission. Then only actual nonservice 4ug/5NS consideration, native/ATA-only linkage or exact individual cashout route with new clue. Source3Hp bought/distributed is proven; do not label rewards or common control without proof."
       },
       {
         "priority": 2,
-        "task": "Seek additional ordinary Werey↔F1b principal/return or exactsame privatecustomer endpoint across unqueried assets/chains only when concrete new evidence exists. MainUSDC47612/F1bowner2712/PURR82/footer/6vy43closed; do not replay. Co-sponsorAgmL, transactionfees, sharedBinance/Relay do not establish owner."
+        "task": "PURR: establish event-specific excluded/noncirculating supply if this event remains a <=1M candidate. Saved closes require <=123.52–129.94M circulation (highest sampled bar high <=122.32M); total supply alone cannot pass. Deprioritize new broad PURR market/cluster collection absent eligibility evidence; genesis/current/closed owner/USDC proof now saved, no repetition."
       },
       {
         "priority": 3,
-        "task": "DXAh exactUSDC postreceipt first400 remains partial at452267420:933; ownerpostreceipt138 also partial at454117922:263. Resume only for meaningful nonservice connection. IndividualDXAh1000USDCRelaydeposit3VDU remains unmapped; never pooledfanout/10USDC attribution."
+        "task": "First-public source: Werey first exact Chrome profile4073 reaches login landing; Solstice3985 same existing gap. Retained thesis times2156/2167 are valid publication assertions, not absolute first. Retrieve exact original publication after authenticated access actually changes; do not repeat loginless landing or treat3245 another-user unavailable source as activity absence."
       },
       {
         "priority": 4,
-        "task": "3TW6 exactowner11 andUSDC19/footerclosed. 6.7ordinaryreturn and115forward→ARTHURbuy are documented, noPURR/SI exposure in these captures. Do not broaden this branch as PURRhiddenwallet without actualsame-token evidence. OriginalTop10public/cap gaps remain; no RZD/Top100 expansion."
+        "task": "Existing individual frontier retained: DXAh USDC400 cursor452267420:933/owner138 cursor454117922:263 and unmapped3VDU1000USDC Relay order only if meaningful nonservice evidence. 5NS→HN88→B48 exact Relay3983/84 requests0 is already closed; no pooled B48/8z fanout or endpoint/customer/ownership inference. No Top100 or parked RZD restart."
       }
     ],
     "scope_exhausted": false,
     "goal_tool_status_at_start": "paused",
-    "work_authorization": "explicit user: 그쪽으로 더 파봐",
-    "browser_connection": "recovered",
-    "review_raw_payload_id": 4058,
-    "report_raw_payload_id": 4059
+    "work_authorization": "explicit user: 진행시켜",
+    "worker_execution_note": "Four existing Luna/max workers saved-only; luna_2 prior remote compaction error, no replacement network agent.",
+    "review_raw_payload_id": 4083,
+    "report_raw_payload_id": 4084
   },
   "runtime_enforcement_note": "This batch used explicit raw141 validation and scoped existing importers. Existing Top100 CLI validation is unchanged.",
   "execution_history": [
@@ -4398,28 +4398,87 @@
       "browser_connection": "recovered",
       "review_raw_payload_id": 4058,
       "report_raw_payload_id": 4059
+    },
+    {
+      "batch_id": "top10-60d-20261010-v1-batch063",
+      "status": "closed_bounded_two_case_independent_proof_and_launch_role_followup",
+      "completed_at_utc": "2026-10-10T06:44:14.318Z",
+      "evidence_raw_payload_id": 4082,
+      "source_cap_review_raw_payload_id": 4081,
+      "worker_raw_payload_ids": [
+        4077,
+        4078,
+        4079,
+        4080
+      ],
+      "source_usage": {
+        "fomo_http_attempts": 0,
+        "fomo_credits": 0,
+        "direct_rpc_attempts": 9,
+        "bridge_attempts": 0,
+        "nodit_indexed_attempts": 0,
+        "market_data_attempts": 0,
+        "chrome_direct_navigations": 2,
+        "primary_documentation_lookups": 6,
+        "bigquery_paid_queries": 0,
+        "bigquery_dry_run_attempts": 0
+      },
+      "canonical_inserted": {
+        "wallet_trace_edges": 0,
+        "onchain_trades": 0,
+        "fomo_events": 0
+      },
+      "strict_lowcap_case_count": 0,
+      "historical_cap": "pending_cap / pending_cap_proxy",
+      "owner": "unknown",
+      "PnL": "unknown",
+      "report_document": "docs/two-case-supplier-role-and-cap-followup-ko.md",
+      "frontier": [
+        {
+          "priority": 1,
+          "task": "DOGINU: exact historical cap/price method and source distribution purpose. Use retained genesis1B ceiling + completed single-pool high435103.58 context + official peak909822 assertion; independently establish event-specific circulation/market price before cap admission. Then only actual nonservice 4ug/5NS consideration, native/ATA-only linkage or exact individual cashout route with new clue. Source3Hp bought/distributed is proven; do not label rewards or common control without proof."
+        },
+        {
+          "priority": 2,
+          "task": "PURR: establish event-specific excluded/noncirculating supply if this event remains a <=1M candidate. Saved closes require <=123.52–129.94M circulation (highest sampled bar high <=122.32M); total supply alone cannot pass. Deprioritize new broad PURR market/cluster collection absent eligibility evidence; genesis/current/closed owner/USDC proof now saved, no repetition."
+        },
+        {
+          "priority": 3,
+          "task": "First-public source: Werey first exact Chrome profile4073 reaches login landing; Solstice3985 same existing gap. Retained thesis times2156/2167 are valid publication assertions, not absolute first. Retrieve exact original publication after authenticated access actually changes; do not repeat loginless landing or treat3245 another-user unavailable source as activity absence."
+        },
+        {
+          "priority": 4,
+          "task": "Existing individual frontier retained: DXAh USDC400 cursor452267420:933/owner138 cursor454117922:263 and unmapped3VDU1000USDC Relay order only if meaningful nonservice evidence. 5NS→HN88→B48 exact Relay3983/84 requests0 is already closed; no pooled B48/8z fanout or endpoint/customer/ownership inference. No Top100 or parked RZD restart."
+        }
+      ],
+      "scope_exhausted": false,
+      "goal_tool_status_at_start": "paused",
+      "work_authorization": "explicit user: 진행시켜",
+      "worker_execution_note": "Four existing Luna/max workers saved-only; luna_2 prior remote compaction error, no replacement network agent.",
+      "review_raw_payload_id": 4083,
+      "report_raw_payload_id": 4084
     }
   ],
   "next_query_plan": {
-    "plan_id": "Werey-PURR-circulatingcap-and-nonservice-return-v1",
+    "plan_id": "two-case-lowcap-and-nonservice-link-v1",
     "status": "pending_cap_and_ownership_not_scope_exhausted",
-    "latest_review_raw_payload_id": 4058,
+    "latest_review_raw_payload_id": 4083,
     "frontier": [
       {
         "priority": 1,
-        "task": "Before new PURR-wide collection, obtain independently useful historical circulating-supply/cap evidence for exact mint8RNU at9/15TH or realBUY. Pool prices4043/44 and currentnullmarketcap do not establish≤1M. No repeatCoinGecko404/currentFDV substitution."
+        "task": "DOGINU: exact historical cap/price method and source distribution purpose. Use retained genesis1B ceiling + completed single-pool high435103.58 context + official peak909822 assertion; independently establish event-specific circulation/market price before cap admission. Then only actual nonservice 4ug/5NS consideration, native/ATA-only linkage or exact individual cashout route with new clue. Source3Hp bought/distributed is proven; do not label rewards or common control without proof."
       },
       {
         "priority": 2,
-        "task": "Seek additional ordinary Werey↔F1b principal/return or exactsame privatecustomer endpoint across unqueried assets/chains only when concrete new evidence exists. MainUSDC47612/F1bowner2712/PURR82/footer/6vy43closed; do not replay. Co-sponsorAgmL, transactionfees, sharedBinance/Relay do not establish owner."
+        "task": "PURR: establish event-specific excluded/noncirculating supply if this event remains a <=1M candidate. Saved closes require <=123.52–129.94M circulation (highest sampled bar high <=122.32M); total supply alone cannot pass. Deprioritize new broad PURR market/cluster collection absent eligibility evidence; genesis/current/closed owner/USDC proof now saved, no repetition."
       },
       {
         "priority": 3,
-        "task": "DXAh exactUSDC postreceipt first400 remains partial at452267420:933; ownerpostreceipt138 also partial at454117922:263. Resume only for meaningful nonservice connection. IndividualDXAh1000USDCRelaydeposit3VDU remains unmapped; never pooledfanout/10USDC attribution."
+        "task": "First-public source: Werey first exact Chrome profile4073 reaches login landing; Solstice3985 same existing gap. Retained thesis times2156/2167 are valid publication assertions, not absolute first. Retrieve exact original publication after authenticated access actually changes; do not repeat loginless landing or treat3245 another-user unavailable source as activity absence."
       },
       {
         "priority": 4,
-        "task": "3TW6 exactowner11 andUSDC19/footerclosed. 6.7ordinaryreturn and115forward→ARTHURbuy are documented, noPURR/SI exposure in these captures. Do not broaden this branch as PURRhiddenwallet without actualsame-token evidence. OriginalTop10public/cap gaps remain; no RZD/Top100 expansion."
+        "task": "Existing individual frontier retained: DXAh USDC400 cursor452267420:933/owner138 cursor454117922:263 and unmapped3VDU1000USDC Relay order only if meaningful nonservice evidence. 5NS→HN88→B48 exact Relay3983/84 requests0 is already closed; no pooled B48/8z fanout or endpoint/customer/ownership inference. No Top100 or parked RZD restart."
       }
     ]
   },

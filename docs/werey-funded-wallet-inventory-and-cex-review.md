@@ -172,3 +172,8 @@ Werey가 2026-09-15 23:39:50 UTC에 남긴 가장 이른 보존 THESIS 당시 F1
 우선순위는 정확PURR의 게시/매수 당시 유통 시총 원천, 추가 실제 원금 공급·반환/개별 귀결의 비서비스 근거다. 기존 완결 조회나 공유 서비스 팬아웃은 반복하지 않는다. 시총 조건이 충족되기 전에는 이 건을 **소유 미확정·시총 보류인 예비 사례**로 유지한다.
 
 근거4057, 검토4058, 시총 검토4056. RPC12회(504/401 포함), Chrome2회, 시장자료3회, Fomo·Bridge·BQ0회. 기존94 state·11 wallet resolution·4,569 trade·645 edge는 보존하고 검토state1 및 실제6.7USDC TRANSFER1만 추가했다. 연구 전체 완성·범위 소진을 선언하지 않는다.
+
+
+## 배치063 독립 근거와 역할 보강
+
+[두 사례 후속](two-case-supplier-role-and-cap-followup-ko.md): DOGINU 공급자의0.8SOL 매수→본지갑/별도주소 배분→잔여 매도를 독립RPC4065–4068로 검증했다. Werey8k/200 일반 송금은4074/4075로 첫 독립 대조했고 PURR genesis1B/권한폐기4063/64를 확보했다. 두 토큰 공식reward·launchairdrop=null은 이후보상/수동분배 부재가 아니다. PURR 역사circ에 큰 공백·DOG 공식peak909.8k도 방법미상이라cap보류/엄격완결0. 개인owner·같은customerendpoint·PnL은미확정. 근거4082/검토4083/cap4081/보고서4084; RPC9/문서탐색6/Chrome2, 경제중복추가0/state95→96.
